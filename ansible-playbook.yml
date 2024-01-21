@@ -1,0 +1,21 @@
+---
+- name: Install Git and Create File
+  hosts: localhost
+  become: true  # Run tasks as a superuser (sudo)
+
+  tasks:
+    - name: Install Git
+      package:
+        name: git
+        state: present
+
+    - name: Create a custom file
+      file:
+        path: /tmp/custom_file.txt
+        state: touch
+
+    - name: Add content to the custom file
+      lineinfile:
+        path: /tmp/custom_file.txt
+        line: "This is a custom file created by Ansible."
+        create: yes
